@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.binary.scripting</groupId>
     <artifactId>ch-leaderboard-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>ch-leaderboard-service</name>
     <description>ch-leaderboard-service</description>
     <url/>
