@@ -1,0 +1,71 @@
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: false
+  name: ""
+
+autoscaling:
+  enabled: false
+
+# Pod annotations for Prometheus scraping and OpenTelemetry auto-instrumentation
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8080"
+  prometheus.io/path: "/actuator/prometheus"
+  # Enable OpenTelemetry Java auto-instrumentation (zero-code)
+  instrumentation.opentelemetry.io/inject-java: "false"
+
+# Kafka configuration
+kafka:
+  bootstrapServers: "kafka-kafka.contractors-haven.svc.cluster.local:9092"
+
+# OpenTelemetry configuration - disable unused instrumentations for faster startup
+opentelemetry:
+  enabled: false
+  instrumentations:
+    kafka: false
+    logback: false
+
+# Health probes using actuator
+startupProbe:
+  httpGet:
+    path: /actuator/health
+    port: http
+  initialDelaySeconds: 45
+  periodSeconds: 10
+  failureThreshold: 30
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: http
+  periodSeconds: 10
+  failureThreshold: 5
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: http
+  periodSeconds: 5
+  failureThreshold: 5
+
+image:
+  registry: docker.io
+  repository: danyzift/ch-leaderboard-service
+  tag: 0.0.1
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  requests:
+    cpu: "200m"
+    memory: "384Mi"
+  limits:
+    cpu: "1000m"
+    memory: "768Mi"
