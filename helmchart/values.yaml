@@ -27,7 +27,7 @@ redis:
   enabled: true
   image:
     repository: redis
-    tag: 0.0.3
+    tag: 7-alpine
     pullPolicy: IfNotPresent
   persistence:
     storageClass: longhorn
