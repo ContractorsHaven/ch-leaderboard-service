@@ -5,17 +5,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExampleRequest {
+public class ScoreSubmittedEvent {
 
-    private UUID id;
+    private UUID eventId;
 
-    private String name;
+    private UUID gameId;
 
-    private String data;
+    private String playerId;
+
+    private Long score;
+
+    private Instant timestamp;
+
 }

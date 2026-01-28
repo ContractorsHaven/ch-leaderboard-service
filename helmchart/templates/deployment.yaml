@@ -46,6 +46,12 @@ spec:
           env:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: "{{ .Values.kafka.bootstrapServers }}"
+            {{- if .Values.redis.enabled }}
+            - name: SPRING_DATA_REDIS_HOST
+              value: "{{ include "helmchart.fullname" . }}-redis"
+            - name: SPRING_DATA_REDIS_PORT
+              value: "6379"
+            {{- end }}
             {{- if .Values.opentelemetry.enabled }}
             - name: OTEL_INSTRUMENTATION_KAFKA_ENABLED
               value: "{{ .Values.opentelemetry.instrumentations.kafka }}"
