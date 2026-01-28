@@ -99,8 +99,8 @@ jobs:
       - name: Update Helm Chart and POM Version
         if: github.ref == 'refs/heads/main'
         run: |
-          # Update only the application image tag (first occurrence), not postgresql
-          sed -i "0,/tag: .*/s/tag: .*/tag: ${{ steps.version.outputs.version }}/" helmchart/values.yaml
+          # Update only the application image tag (after danyzift repo line), not redis
+          sed -i "/repository: danyzift\/ch-leaderboard-service/,/tag:/s/tag: .*/tag: ${{ steps.version.outputs.version }}/" helmchart/values.yaml
 
           # Update Chart.yaml appVersion
           sed -i "s/^appVersion: .*/appVersion: \"${{ steps.version.outputs.version }}\"/" helmchart/Chart.yaml
