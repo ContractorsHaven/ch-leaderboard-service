@@ -73,7 +73,7 @@ readinessProbe:
 image:
   registry: docker.io
   repository: danyzift/ch-leaderboard-service
-  tag: 0.0.1
+  tag: 0.0.5
   pullPolicy: Always
 
 service:

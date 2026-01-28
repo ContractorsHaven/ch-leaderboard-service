@@ -3,4 +3,4 @@ name: ch-leaderboard-service
 description: Helm chart for ContractorsHaven ChLeaderboardService
 type: application
 version: 0.0.1
-appVersion: "0.0.4"
+appVersion: "0.0.5"
